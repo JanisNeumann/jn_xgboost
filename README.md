@@ -1,10 +1,9 @@
 # jn_xgboost
 The XGBoost architecture is intended to make testing different XGBoost hyperparameters
-as easy as possible. It is divided into several scripts. The main user-facing one is a setup
+as easy as possible. It is divided into several scripts.The main user-facing one is a setup
 script; its default name is script is jn_xgboost_setup.R. It is used to set file paths,
 hyperparameters to test, number of cores etc. and initiates the modeling process by
-sourcing the second script, jn_xgboost_hub.R. It’
-s called a hub script because it sources
+sourcing the second script, jn_xgboost_hub.R. It’s called a hub script because it sources
 other scripts depending on the settings detected in the setup script. Currently, it sources a
 run and eval script depending on whether or not regression or softprob classification is
 selected by the user. The run scripts train one model each for all the possible combinations
@@ -19,6 +18,9 @@ edit. It is also the only one not explicitly assumed to be in the same folder as
 scripts, meaning the user can and should make different setup scripts with different names
 for different runs. Inputs are assumed to be split into different rds files containing predictor
 and outcome variable data.
+As the validation data set is used to determine the optimal hyperparameters, it is important to
+reserve at least one independent test set the models are not exposed to during this process to
+avoid overfitting models to the specific (training and validation) data at hand.
 
 Things to specify in the setup script – everything is detailed by comments in the script:
 1. File paths: Path to jn_xgboost_hub.R. All inputs - training data and, optionally, validation
